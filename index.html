@@ -59,10 +59,9 @@
     gap: 22px;
   }
   .brand-smartovate {
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-    color: #17131F;
+    height: 32px;
+    width: auto;
+    display: block;
   }
   .brand-divider {
     width: 1px;
@@ -70,13 +69,9 @@
     background: rgba(27, 18, 80, 0.16);
   }
   .brand-subul {
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: 0.02em;
-    background: linear-gradient(90deg, var(--pink), var(--purple));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    height: 36px;
+    width: auto;
+    display: block;
   }
   .kicker {
     font-family: 'JetBrains Mono', monospace;
@@ -335,15 +330,15 @@
 
   <header class="site">
     <div class="brands">
-      <div class="brand-smartovate">Smartovate</div>
+      <img class="brand-smartovate" src="smartovate-logo.png" alt="Smartovate">
       <div class="brand-divider"></div>
-      <div class="brand-subul">SUBUL</div>
+      <img class="brand-subul" src="subul-logo.png" alt="Subul">
     </div>
     <div class="kicker">Programme SUBUL XP<br>Catalogue de sujets PFE</div>
   </header>
 
   <div class="hero">
-    <h1>200 sujets de PFE <span class="accent">100&nbsp;% open source</span></h1>
+    <h1>200 sujets de <span class="accent">PFE</span></h1>
     <p>Intelligence artificielle, AI Agents, DevOps, cybersécurité et analyse de données. Chaque sujet ne mobilise que des outils libres, sans licence propriétaire ni compte payant.</p>
   </div>
 
