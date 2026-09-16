@@ -224,6 +224,12 @@ const DOMAINS = [
   { key: "data", label: "Data Analysis", rows: DATA },
 ];
 
+function typeFromLevel(level) {
+  return level === "Débutant"
+    ? { type: "PFE Licence", months: 4 }
+    : { type: "PFE Ingénieur ou Master", months: 6 };
+}
+
 export const SUJETS = DOMAINS.flatMap((d, di) =>
   d.rows.map((r, i) => ({
     id: "PFE-" + String(di * 40 + i + 1).padStart(3, "0"),
@@ -231,10 +237,9 @@ export const SUJETS = DOMAINS.flatMap((d, di) =>
     domainLabel: d.label,
     title: r[0],
     stack: r[1],
-    level: r[2],
-    months: r[3],
+    ...typeFromLevel(r[2]),
   }))
 );
 
 export const DOMAIN_LIST = DOMAINS.map((d) => ({ key: d.key, label: d.label, count: d.rows.length }));
-export const LEVELS = ["Débutant", "Intermédiaire", "Avancé"];
+export const TYPES = ["PFE Licence", "PFE Ingénieur ou Master"];

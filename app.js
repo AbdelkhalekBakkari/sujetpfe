@@ -2,11 +2,11 @@ import { SUJETS, DOMAIN_LIST } from "./data.js";
 
 const TINTS = { ai: "#E01D8C", agents: "#B0177F", devops: "#8A1B85", cyber: "#6B1E86", data: "#4A1A6E" };
 
-const state = { active: "all", level: "all", query: "", sort: "id" };
+const state = { active: "all", type: "all", query: "", sort: "id" };
 
 const els = {
   query: document.getElementById("query"),
-  level: document.getElementById("level"),
+  type: document.getElementById("type"),
   sort: document.getElementById("sort"),
   chips: document.getElementById("chips"),
   countLabel: document.getElementById("countLabel"),
@@ -44,7 +44,7 @@ function getResults() {
 
   let results = SUJETS.filter((s) => {
     if (state.active !== "all" && s.domain !== state.active) return false;
-    if (state.level !== "all" && s.level !== state.level) return false;
+    if (state.type !== "all" && s.type !== state.type) return false;
     if (q && !(s.title.toLowerCase().includes(q) || s.stack.toLowerCase().includes(q) || s.id.toLowerCase().includes(q))) return false;
     return true;
   });
@@ -73,7 +73,7 @@ function renderCards(results) {
       <div class="card-title">${s.title}</div>
       <div class="card-stack">${s.stack}</div>
       <div class="card-meta">
-        <div class="pill">${s.level}</div>
+        <div class="pill">${s.type}</div>
         <div class="pill">${s.months} mois</div>
       </div>
     `;
@@ -91,17 +91,17 @@ function render() {
   els.empty.classList.toggle("show", SUJETS.length > 0 && results.length === 0);
   els.countLabel.textContent = `${results.length} sujet${results.length > 1 ? "s affichés" : " affiché"}`;
 
-  els.level.value = state.level;
+  els.type.value = state.type;
   els.sort.value = state.sort;
   if (els.query.value !== state.query) els.query.value = state.query;
 }
 
 els.query.addEventListener("input", (e) => { state.query = e.target.value; render(); });
-els.level.addEventListener("change", (e) => { state.level = e.target.value; render(); });
+els.type.addEventListener("change", (e) => { state.type = e.target.value; render(); });
 els.sort.addEventListener("change", (e) => { state.sort = e.target.value; render(); });
 els.reset.addEventListener("click", () => {
   state.active = "all";
-  state.level = "all";
+  state.type = "all";
   state.query = "";
   state.sort = "id";
   render();
