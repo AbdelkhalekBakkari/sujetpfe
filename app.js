@@ -13,7 +13,10 @@ const els = {
   reset: document.getElementById("reset"),
   grid: document.getElementById("grid"),
   empty: document.getElementById("empty"),
+  totalCount: document.getElementById("totalCount"),
 };
+
+els.totalCount.textContent = SUJETS.length;
 
 function chipLabel(active) {
   return active
