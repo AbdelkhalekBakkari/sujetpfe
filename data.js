@@ -2045,6 +2045,13 @@ function typeFromLevel(level) {
   return { type: "PFE Ingénieur ou Master", months: 6 };
 }
 
+const LEVEL_CODE = {
+  "Débutant": "beginner",
+  "Intermédiaire": "intermediate",
+  "Avancé": "advanced",
+  "Recherche": "research",
+};
+
 let counter = 0;
 export const SUJETS = DOMAINS.flatMap((d) =>
   d.rows.map((r) => {
@@ -2055,6 +2062,7 @@ export const SUJETS = DOMAINS.flatMap((d) =>
       domainLabel: d.label,
       title: r[0],
       stack: r[1],
+      level: LEVEL_CODE[r[2]] || "intermediate",
       ...typeFromLevel(r[2]),
     };
   })
