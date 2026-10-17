@@ -122,11 +122,15 @@ function renderCards(results) {
   els.grid.appendChild(frag);
 }
 
-function render() {
+function render({ skipCardRender = false } = {}) {
   renderChips();
 
   const results = getResults();
-  renderCards(results);
+  // The initial "all subjects, default sort" view is already prerendered into
+  // index.html at build time (see tools/prerender.mjs) so crawlers get full
+  // content without running JS. Skip rebuilding it on first paint — only
+  // re-render once the visitor actually changes a filter.
+  if (!skipCardRender) renderCards(results);
 
   els.empty.classList.toggle("show", SUJETS.length > 0 && results.length === 0);
   els.countLabel.textContent = `${results.length} sujet${results.length > 1 ? "s affichés" : " affiché"}`;
@@ -146,4 +150,8 @@ els.type.addEventListener("change", (e) => { state.type = e.target.value; render
 els.sort.addEventListener("change", (e) => { state.sort = e.target.value; render(); });
 els.reset.addEventListener("click", () => { Object.assign(state, DEFAULTS); render(); });
 
-render();
+const isInitialStateDefault =
+  state.active === DEFAULTS.active && state.type === DEFAULTS.type &&
+  state.query === DEFAULTS.query && state.sort === DEFAULTS.sort;
+
+render({ skipCardRender: isInitialStateDefault });
